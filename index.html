@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Peer Counter</title>
+		<style>
+
+	#result {
+    color: black;
+		position: fixed;
+ 		top: 50%;
+ 		left: 50%;
+		margin-top: -95px;
+ 		margin-left: -75px;
+		font-family: "Courier New", monospace;
+		font-size: 200px;
+}
+
+		</style>
+	</head>
+	<body>
+		<span id="result"></span>
+		<script>
+			window.onload = () => {
+		let page = new DatArchive(window.location.toString())
+
+				page.getInfo().then((res) => {
+					document.querySelector('#result').innerHTML = `${res.peers}`;
+});
+
+	setInterval(updatePeers, 2000)
+
+		async function updatePeers () {
+		let info = await page.getInfo();
+			document.querySelector('#result').innerHTML = `${info.peers}`;
+    }
+}
+		</script>
+	</body>
+</html>
